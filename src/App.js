@@ -1,11 +1,10 @@
-// TODO: fix openSearch()
-
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
-import SearchBooks from './SearchBooks';
-import ListBooks from './ListBooks';
+import SearchBooks from './SearchBooks'
+import ListBooks from './ListBooks'
 
+/*
 const books = [
   {
     coverStyle:
@@ -112,15 +111,17 @@ class BooksApp extends React.Component {
     showSearchPage: false
   }
 
-  // openSearch = this.setState({ showSearchPage: true })
+  showLibrary = () => this.setState({showSearchPage: false})
+
+  showSearch = () => this.setState({showSearchPage: true})
 
   render() {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <SearchBooks />
+          <SearchBooks books={this.state.books} bookshelves={this.state.bookshelves} onNavigateToLibrary={this.showLibrary} />
         ) : (
-            <ListBooks books={books} bookshelves={bookshelves} /*openSearch={this.openSearch}*/ />
+            <ListBooks books={this.state.books} bookshelves={this.state.bookshelves} onNavigateToSearch={this.showSearch} />
           )}
       </div>
     )

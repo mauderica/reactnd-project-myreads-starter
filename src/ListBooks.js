@@ -1,5 +1,5 @@
 // Note: This component must receive a 'bookshelves' prop in its call
-// TODO: fix onClick
+// TODO: add PropTypes
 
 import React from 'react'
 import BookShelf from './BookShelf';
@@ -20,7 +20,7 @@ class ListBooks extends React.Component {
                     </div>
                 </div>
                 <div className="open-search">
-                    <a onClick={this.props.openSearch}>Add a book</a>
+                    <a onClick={() => this.props.onNavigateToSearch()}>Add a book</a>
                 </div>
             </div>
         )
