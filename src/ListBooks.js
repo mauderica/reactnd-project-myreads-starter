@@ -2,6 +2,7 @@
 // TODO: add PropTypes
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf';
 
 class ListBooks extends React.Component {
@@ -20,7 +21,7 @@ class ListBooks extends React.Component {
                     </div>
                 </div>
                 <div className="open-search">
-                    <a onClick={() => this.props.onNavigateToSearch()}>Add a book</a>
+                    <Link to="search">Add a book</Link>
                 </div>
             </div>
         )
