@@ -16,7 +16,13 @@ class ListBooks extends React.Component {
                 <div className="list-books-content">
                     <div>
                         {this.props.bookshelves.map((bookshelf, index) => (
-                            <BookShelf key={index} title={bookshelf.title} bookshelves={this.props.bookshelves}/>
+                            <BookShelf
+                                key={index}
+                                title={bookshelf.title}
+                                optionValue={bookshelf.optionValue}
+                                bookshelves={this.props.bookshelves}
+                                books={this.props.books}
+                            />
                         ))}
                     </div>
                 </div>
