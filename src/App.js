@@ -85,25 +85,25 @@ const books = [
     shelf: "Read",
   },
 ]
-
-const bookshelves = [
-  {
-    title: 'Currently Reading',
-    optionValue: 'currentlyReading',
-  },
-  {
-    title: 'Want to Read',
-    optionValue: 'wantToRead',
-  },
-  {
-    title: 'Read',
-    optionValue: 'read',
-  },
-]
+*/
 
 class BooksApp extends React.Component {
   state = {
     books: [],
+    bookshelves: [
+      {
+        title: 'Currently Reading',
+        optionValue: 'currentlyReading',
+      },
+      {
+        title: 'Want to Read',
+        optionValue: 'wantToRead',
+      },
+      {
+        title: 'Read',
+        optionValue: 'read',
+      },
+    ],
   }
 
   componentDidMount() {
