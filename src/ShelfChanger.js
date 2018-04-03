@@ -1,4 +1,4 @@
-// Note: This component must receive a 'bookshelves' prop in its call
+// TODO: update propTypes
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -7,11 +7,11 @@ class ShelfChanger extends React.Component {
     static propTypes = {
         bookshelves: PropTypes.array.isRequired
     }
-    
+
     render() {
         return (
             < div className="book-shelf-changer" >
-                <select>
+                <select value={this.props.shelf} onChange={(event) => this.props.onSelectShelf(event.target.value)} >
                     <option value="none" disabled>Move to...</option>
                     {
                         this.props.bookshelves.map((bookshelf, index) => (

@@ -1,16 +1,22 @@
-// Note: This component must receive a 'bookshelves', (about the book:) 'coverStyle', 'title', 'authors' prop in its call
+// TODO: add PropTypes
 
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import ShelfChanger from './ShelfChanger';
 
 class Book extends React.Component {
-    state = {
-        isOnShelf: 'currentlyReading',
+
+    updateShelf = (userOption) => {
+        let bookMoved = this.props.book;
+        BooksAPI.update(bookMoved, userOption).then((response) => {
+                console.log(response);
+                this.props.onBookMove(bookMoved);
+                console.log('onBookMove() has been called');
+            }
+        )
     }
 
     render() {
-        // console.log('Props', this.props)
         return (
             <div className="book">
                 <div className="book-top">
@@ -19,14 +25,11 @@ class Book extends React.Component {
                         height: 200,
                         backgroundImage: `url(${this.props.book.imageLinks.thumbnail})`,
                     }}></div>
-                    {/* 
-                        TODO: The selected option of 'ShelfChanger' should be linked to the internal state of the book,
-                        much like a form input controlled component.
-                        
-                        TODO: The position of the checkmark should match the Book component state
-                        (idea: pass down this info to ShelfChanger as a prop?)
-                    */}
-                    <ShelfChanger bookshelves={this.props.bookshelves} onSelectShelf={this.updateShelf} />
+                    <ShelfChanger
+                        bookshelves={this.props.bookshelves}
+                        shelf={this.props.book.shelf}
+                        onSelectShelf={(shelfSelected) => this.updateShelf(shelfSelected)}
+                    />
                 </div>
                 <div className="book-title">{this.props.book.title}</div>
                 <div className="book-authors">{this.props.book.authors.join(', ')}</div>
