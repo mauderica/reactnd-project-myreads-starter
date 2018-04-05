@@ -9,30 +9,43 @@ class Book extends React.Component {
     updateShelf = (userOption) => {
         let bookMoved = this.props.book;
         BooksAPI.update(bookMoved, userOption).then((response) => {
-                console.log(response);
-                this.props.onBookMove(bookMoved);
-                console.log('onBookMove() has been called');
-            }
+            console.log(response);
+            this.props.onBookMove(bookMoved);
+            console.log('onBookMove() has been called');
+        }
         )
     }
 
     render() {
+        // console.log('Book.js --> Props', this.props)
+        let authors = this.props.book.authors;
+        let imageLinks = this.props.book.imageLinks;
+
+        let shelf = this.props.book.shelf;
+        if (shelf === undefined) {
+            shelf = "none";
+        }
+
         return (
             <div className="book">
                 <div className="book-top">
-                    <div className="book-cover" style={{
-                        width: 140,
-                        height: 200,
-                        backgroundImage: `url(${this.props.book.imageLinks.thumbnail})`,
-                    }}></div>
+                    {imageLinks !== undefined && (
+                        <div className="book-cover" style={{
+                            width: 140,
+                            height: 200,
+                            backgroundImage: `url(${imageLinks.thumbnail})`,
+                        }}></div>
+                    )}
                     <ShelfChanger
                         bookshelves={this.props.bookshelves}
-                        shelf={this.props.book.shelf}
+                        shelf={shelf}
                         onSelectShelf={(shelfSelected) => this.updateShelf(shelfSelected)}
                     />
                 </div>
                 <div className="book-title">{this.props.book.title}</div>
-                <div className="book-authors">{this.props.book.authors.join(', ')}</div>
+                {authors !== undefined && (
+                    <div className="book-authors">{authors.join(', ')}</div>
+                )}
             </div>
         )
     }

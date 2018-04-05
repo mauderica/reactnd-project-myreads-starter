@@ -12,7 +12,7 @@ class ShelfChanger extends React.Component {
         return (
             < div className="book-shelf-changer" >
                 <select value={this.props.shelf} onChange={(event) => this.props.onSelectShelf(event.target.value)} >
-                    <option value="none" disabled>Move to...</option>
+                    <option value="none-disabled" disabled>Move to...</option>
                     {
                         this.props.bookshelves.map((bookshelf, index) => (
                             <option key={index} value={bookshelf.optionValue}>{bookshelf.title}</option>
