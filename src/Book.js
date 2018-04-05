@@ -2,7 +2,7 @@
 
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
-import ShelfChanger from './ShelfChanger';
+import ShelfChanger from './ShelfChanger'
 
 class Book extends React.Component {
 
