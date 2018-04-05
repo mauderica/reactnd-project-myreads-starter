@@ -3,28 +3,133 @@
 
 import React from 'react'
 import { Link } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 import Book from './Book'
-import escapeRegExp from 'escape-string-regexp'
+// import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
 class SearchBooks extends React.Component {
     state = {
         query: '',
+        haveMatch: false,
+        bookResults: [],
+        searchTerms: [
+            'ANDROID',
+            'ART',
+            'ARTIFICIAL INTELLIGENCE',
+            'ASTRONOMY',
+            'AUSTEN',
+            'BASEBALL',
+            'BASKETBALL',
+            'BHAGAT',
+            'BIOGRAPHY',
+            'BRIEF',
+            'BUSINESS',
+            'CAMUS',
+            'CERVANTES',
+            'CHRISTIE',
+            'CLASSICS',
+            'COMICS',
+            'COOK',
+            'CRICKET',
+            'CYCLING',
+            'DESAI',
+            'DESIGN',
+            'DEVELOPMENT',
+            'DIGITAL MARKETING',
+            'DRAMA',
+            'DRAWING',
+            'DUMAS',
+            'EDUCATION',
+            'EVERYTHING',
+            'FANTASY',
+            'FILM',
+            'FINANCE',
+            'FIRST',
+            'FITNESS',
+            'FOOTBALL',
+            'FUTURE',
+            'GAMES',
+            'GANDHI',
+            'HOMER',
+            'HORROR',
+            'HUGO',
+            'IBSEN',
+            'JOURNEY',
+            'KAFKA',
+            'KING',
+            'LAHIRI',
+            'LARSSON',
+            'LEARN',
+            'LITERARY FICTION',
+            'MAKE',
+            'MANAGE',
+            'MARQUEZ',
+            'MONEY',
+            'MYSTERY',
+            'NEGOTIATE',
+            'PAINTING',
+            'PHILOSOPHY',
+            'PHOTOGRAPHY',
+            'POETRY',
+            'PRODUCTION',
+            'PROGRAMMING',
+            'REACT',
+            'REDUX',
+            'RIVER',
+            'ROBOTICS',
+            'ROWLING',
+            'SATIRE',
+            'SCIENCE FICTION',
+            'SHAKESPEARE',
+            'SINGH',
+            'SWIMMING',
+            'TALE',
+            'THRUN',
+            'TIME',
+            'TOLSTOY',
+            'TRAVEL',
+            'ULTIMATE',
+            'VIRTUAL REALITY',
+            'WEB DEVELOPMENT',
+            'IOS'],
     }
 
     updateQuery = (userInput) => {
-        this.setState({ query: userInput.trim() })
+        this.setState({ query: userInput });
+        this.checkMatch(userInput);
+    }
+
+    checkMatch = (userInput) => {
+        let query = userInput.trim().toUpperCase();
+        if (this.state.searchTerms.includes(query)) {
+            console.log(`Calling search for "${query}".`)
+            this.setState({ haveMatch: true });
+            this.searchBooks(query);
+        } else {
+            this.clearBookResults();
+        }
+    }
+
+    clearBookResults = () => {
+        this.setState({ haveMatch: false });
+        this.setState({ bookResults: [] });
+    }
+
+    searchBooks = (query) => {
+        BooksAPI.search(query).then((bookResults) => {
+            this.setState({ bookResults });
+            // console.log('Book results: ', bookResults);
+        })
     }
 
     render() {
+        console.log('The bookResults in state are: ', this.state.bookResults);
         let showingBooks;
-        if (this.state.query) {
-            const match = new RegExp(escapeRegExp(this.state.query), 'i')
-            showingBooks = this.props.books.filter((book) =>
-                (match.test(book.title) || match.test(book.authors))
-            );
+        if (this.state.haveMatch) {
+            showingBooks = this.state.bookResults;
         } else {
-            showingBooks = []; // this.props.books
+            showingBooks = [];
         }
 
         showingBooks.sort(sortBy('title'));
@@ -50,11 +155,16 @@ class SearchBooks extends React.Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {showingBooks.map((book, index) => (
-                            <li key={index}>
-                                <Book book={book} bookshelves={this.props.bookshelves} />
-                            </li>
-                        ))}
+                        {
+                            showingBooks.map((book, index) => (
+                                <li key={index}>
+                                    <Book
+                                        book={book}
+                                        bookshelves={this.props.bookshelves}
+                                    />
+                                </li>
+                            ))
+                        }
                     </ol>
                 </div>
             </div>
