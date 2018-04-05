@@ -1,7 +1,7 @@
 // TODO: add PropTypes
 
 import React from 'react'
-import Book from './Book';
+import Book from './Book'
 
 class BookShelf extends React.Component {
     render() {

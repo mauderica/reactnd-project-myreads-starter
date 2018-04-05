@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Link } from 'react-router-dom'
-import BookShelf from './BookShelf';
+import BookShelf from './BookShelf'
 
 class ListBooks extends React.Component {
     render() {

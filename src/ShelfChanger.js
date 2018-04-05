@@ -1,11 +1,11 @@
-// TODO: update propTypes
-
 import React from 'react'
 import PropTypes from 'prop-types'
 
 class ShelfChanger extends React.Component {
     static propTypes = {
-        bookshelves: PropTypes.array.isRequired
+        bookshelves: PropTypes.array.isRequired,
+        shelf: PropTypes.string.isRequired,
+        onSelectShelf: PropTypes.func.isRequired,
     }
 
     render() {
