@@ -128,11 +128,18 @@ class SearchBooks extends React.Component {
         let showingBooks;
         if (this.state.haveMatch) {
             showingBooks = this.state.bookResults;
+            // Check if any book in the results is already on a shelf - if so, show it instead of the raw result book:
+            showingBooks.forEach((bookResult, index) => {
+                let bookOnShelf = this.props.books.find(book => book.id === bookResult.id);
+                if (bookOnShelf !== undefined) {
+                    // console.log(bookOnShelf);
+                    showingBooks.splice(index, 1, bookOnShelf);
+                }
+            })
+            showingBooks.sort(sortBy('title'));
         } else {
             showingBooks = [];
         }
-
-        showingBooks.sort(sortBy('title'));
 
         return (
             <div className="search-books">
