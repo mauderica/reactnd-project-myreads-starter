@@ -35,7 +35,7 @@ class BooksApp extends React.Component {
   }
 
   updateBooks = (bookMoved) => {
-    alert(`You are about to move "${bookMoved.title}" off the "${bookMoved.shelf}" shelf.`);
+    // alert(`You are about to move "${bookMoved.title}" off the "${bookMoved.shelf}" shelf.`);
     this.getBooks();
   }
 
@@ -46,6 +46,7 @@ class BooksApp extends React.Component {
           <SearchBooks
             books={this.state.books}
             bookshelves={this.state.bookshelves}
+            onBookMove={(bookMoved) => this.updateBooks(bookMoved)}
           />
         )} />
         <Route exact path="/" render={() => (

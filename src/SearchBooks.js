@@ -161,6 +161,7 @@ class SearchBooks extends React.Component {
                                     <Book
                                         book={book}
                                         bookshelves={this.props.bookshelves}
+                                        onBookMove={(bookMoved) => this.props.onBookMove(bookMoved)}
                                     />
                                 </li>
                             ))

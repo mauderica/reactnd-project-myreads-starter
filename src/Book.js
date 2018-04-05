@@ -9,10 +9,10 @@ class Book extends React.Component {
     updateShelf = (userOption) => {
         let bookMoved = this.props.book;
         BooksAPI.update(bookMoved, userOption).then((response) => {
-                console.log(response);
-                this.props.onBookMove(bookMoved);
-                console.log('onBookMove() has been called');
-            }
+            console.log(response);
+            this.props.onBookMove(bookMoved);
+            console.log('onBookMove() has been called');
+        }
         )
     }
 
